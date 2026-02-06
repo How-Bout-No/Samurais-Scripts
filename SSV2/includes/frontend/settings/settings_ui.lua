@@ -18,6 +18,7 @@ local cfgReset      = {
 		{ pair = Pair.new("EntityForge", "features.entity_forge"),    clicked = false, selected = false },
 		{ pair = Pair.new("YimActions", "features.yim_actions"),      clicked = false, selected = false },
 		{ pair = Pair.new("YimResupplier", "features.yrv3"),          clicked = false, selected = false },
+		{ pair = Pair.new("YimHeists", "features.yim_heists"),        clicked = false, selected = false },
 		{ pair = Pair.new("Controller Keybinds", "gamepad_keybinds"), clicked = false, selected = false },
 		{ pair = Pair.new("Keyboard Keybinds", "keyboard_keybinds"),  clicked = false, selected = false },
 	},

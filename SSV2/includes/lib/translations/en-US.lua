@@ -665,4 +665,13 @@ return {
 	["EF_IMPORT_SUCCESS"]                  = "Data successfully imported.",
 	["EF_CHILD_ALPHA"]                     = "Child Item Transparency: %d",
 	--#endregion
+
+	--#region YimHeists
+	["YH_BASIC_TAB"]                       = "Basic",
+	["YH_HEIST_TAB"]                       = "Heists",
+	["YH_FEATURE_DISABLED"]                = "This feature is currently disabled!",
+	["YH_PREP_SETTINGS"]                   = "Skips",
+	["YH_PREP_SKIP"]                       = "Skip To Finale",
+	["YH_PREP_SKIP_NOTIF"]                 = "All Prep Missions have been skipped. You can now start the final mission.",
+	--#endregion
 }
