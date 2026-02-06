@@ -133,6 +133,7 @@ local function drawNamePlate(business, custom_name, bg, tpKeepVeh)
 		| (ImGuiWindowFlags.AlwaysUseWindowPadding or 0)
 	)
 
+	ImGui.Spacing()
 	ImGui.SetWindowFontScale(1.18)
 	local custom_name_width = ImGui.CalcTextSize(custom_name)
 	ImGui.SetCursorPosX((ImGui.GetContentRegionAvail() - custom_name_width - 10) * 0.5)

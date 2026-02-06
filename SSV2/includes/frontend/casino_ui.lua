@@ -32,6 +32,8 @@ local function drawGamblingTab()
 		GVars.features.dunk.set_dealers_poker_cards
 	)
 
+	-- TODO: Fix for Enhanced
+	ImGui.BeginDisabled(Backend:GetAPIVersion() ~= Enums.eAPIVersion.V1)
 	ImGui.SeparatorText(_T "CP_BLACKJACK_SETTINGS")
 	ImGui.BulletText(_T "CP_BLACKJACK_DEALER_FACE_DOWN_CARD")
 	ImGui.SameLine()
@@ -39,6 +41,7 @@ local function drawGamblingTab()
 	if GUI:Button(_T "CP_BLACKJACK_FORCE_DEALER_BUST") then
 		CasinoPacino:ForceDealerBust()
 	end
+	ImGui.EndDisabled()
 
 	ImGui.SeparatorText(_T "CP_ROULETTE_SETTINGS")
 	GVars.features.dunk.force_roulette_wheel, _ = GUI:CustomToggle(_T("CP_ROULETTE_FORCE_RED_18"),
