@@ -307,6 +307,7 @@ return {
 	["YRV3_CWASH_HEAT"]                    = "Heat Level",
 	["YRV3_CWASH_LEGAL_WORK_CD"]           = "Disable Legal Work Cooldown",
 	["YRV3_CWASH_ILLEGAL_WORK_CD"]         = "Disable Illegal Work Cooldown",
+	["YRV3_HEAT_NOTIF"]                    = "Heat Level cleared.",
 	["YRV3_RESTOCK_ERR"]                   = "Supplies are already full.",
 	["YRV3_FAST_PROD_ERR"]                 = "Production is already at maximum. Pelase sell your stock first.",
 	["YRV3_STATE_WAIT_TRANSITION"]         = "Waiting for freemode transition.",

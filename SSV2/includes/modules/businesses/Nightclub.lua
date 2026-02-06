@@ -10,6 +10,7 @@
 local BusinessFront   = require("includes.modules.businesses.BusinessFront")
 local BusinessHub     = require("includes.modules.businesses.BusinessHub")
 local RawBusinessData = require("includes.data.yrv3_data")
+local SGSL = require("includes.services.SGSL")
 
 ---@class ClubOpts : BusinessFrontOpts
 ---@field custom_name string
@@ -95,12 +96,24 @@ function Nightclub:AddSubBusiness(index)
 		return
 	end
 
-	table.insert(self.m_subs, BusinessHub.new({
-		id        = index,
-		name      = ref.name,
-		max_units = tunables.get_int(ref.max_units_tunable),
-		vpu       = tunables.get_int(ref.vpu_tunable)
-	}))
+	if (Backend:GetAPIVersion() == Enums.eAPIVersion.V2) then
+		local obj1 = SGSL:Get(SGSL.data.bhub_max_units_global_1)
+		local BMUG = obj1:AsGlobal()
+		local offset = obj1:GetOffset(1) + BusinessFront:GetNameOffset(ref.name)
+		table.insert(self.m_subs, BusinessHub.new({
+			id        = index,
+			name      = ref.name,
+			max_units = BMUG:At(offset):ReadInt(),
+			vpu       = tunables.get_int(ref.vpu_tunable)
+		}))
+	else
+		table.insert(self.m_subs, BusinessHub.new({
+			id        = index,
+			name      = ref.name,
+			max_units = tunables.get_int(ref.max_units_tunable),
+			vpu       = tunables.get_int(ref.vpu_tunable)
+		}))
+	end
 end
 
 return Nightclub

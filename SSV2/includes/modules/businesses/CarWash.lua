@@ -103,6 +103,7 @@ function CarWashSubBusiness:ClearHeat()
 	end
 
 	stats.set_packed_stat_int(self.m_heat_packed_stat, 0)
+	Notifier:ShowSuccess(self:GetName(), _T("YRV3_HEAT_NOTIF"))
 end
 
 ---@return boolean
@@ -195,6 +196,7 @@ function CarWash:ClearHeat()
 	end
 
 	stats.set_packed_stat_int(24924, 0)
+	Notifier:ShowSuccess(self:GetName(), _T("YRV3_HEAT_NOTIF"))
 end
 
 ---@return CashSafe

@@ -1070,7 +1070,7 @@ function Game.SetWaypointCoords(target)
 			if (HUD.DOES_BLIP_EXIST(testBlip)) then
 				x, y, _ = HUD.GET_BLIP_INFO_ID_COORD(testBlip):unpack()
 			elseif (Game.IsScriptHandle(target)) then
-				x, y, _ = Game.GetEntityCoords(target, false):unpack()
+				x, y, _ = vec3:zero():unpack()
 			end
 		end
 
