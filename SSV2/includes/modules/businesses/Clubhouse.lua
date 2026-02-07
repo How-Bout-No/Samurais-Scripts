@@ -91,10 +91,8 @@ function Clubhouse:AddSubBusiness(index)
 		normalized_name = not normalized_name:isempty() and Game.GetGXTLabel(normalized_name) or nil,
 		max_units       = ref2.max_units,
 		vpu             = tunables.get_int(ref2.vpu),
-		-- vpu_mult_1      = has_eq_upgrade and eq_upg_mult or 0,
-		-- vpu_mult_2      = has_staff_upgrade and stf_upg_mult or 0,
-		vpu_mult_1      = has_eq_upgrade and 1 or 0,
-		vpu_mult_2      = has_staff_upgrade and 1 or 0,
+		vpu_mult_1      = has_eq_upgrade and eq_upg_mult or 0,
+		vpu_mult_2      = has_staff_upgrade and stf_upg_mult or 0,
 		coords          = ref.coords,
 	}))
 end

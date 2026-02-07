@@ -360,10 +360,8 @@ function YRV3:PopulateBikerBusinesses()
 				id         = 5,
 				name       = Game.GetGXTLabel(_F("MP_BUNKER_%d", gxt_idx)),
 				coords     = ref and ref.coords or vec3:zero(),
-				-- vpu_mult_1 = has_eq_upgrade and eq_upg_mult or 0,
-				-- vpu_mult_2 = has_staff_upgrade and stf_upg_mult or 0,
-				vpu_mult_1 = has_eq_upgrade and 1000 or 0,
-				vpu_mult_2 = has_staff_upgrade and 1000 or 0,
+				vpu_mult_1 = has_eq_upgrade and eq_upg_mult or 0,
+				vpu_mult_2 = has_staff_upgrade and stf_upg_mult or 0,
 				vpu        = tunables.get_int("GR_MANU_PRODUCT_VALUE") or 5000,
 				max_units  = 100,
 			})
@@ -378,8 +376,7 @@ function YRV3:PopulateBikerBusinesses()
 		self.m_businesses.acid_lab = Factory.new({
 			id         = 6,
 			name       = Game.GetGXTLabel("MP_BWH_ACID"),
-			-- vpu_mult_1 = has_eq_upgrade and eq_upg_mult or 0,
-			vpu_mult_1 = has_eq_upgrade and 1485 or 0,
+			vpu_mult_1 = has_eq_upgrade and eq_upg_mult or 0,
 			vpu_mult_2 = 0,
 			vpu        = tunables.get_int("BIKER_ACID_PRODUCT_VALUE"),
 			max_units  = 160,

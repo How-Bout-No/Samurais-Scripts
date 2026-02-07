@@ -10,16 +10,6 @@
 local BusinessBase    = require("includes.modules.businesses.BusinessBase")
 local CashSafe        = require("includes.modules.businesses.CashSafe")
 
-local ProductNames <const>   = {
-	["Weapons"] = 0,
-	["Cocaine"] = 1,
-	["Meth"] = 2,
-	["Weed"] = 3,
-	["Fake ID"] = 4,
-	["Cash"] = 5,
-	["Cargo"] = 6,
-}
-
 ---@class BusinessFrontOpts : BusinessOpts
 ---@field id integer
 ---@field name string
@@ -68,12 +58,6 @@ function BusinessFront:GetSubBusinesses() return self.m_subs end
 ---@return boolean
 function BusinessFront:HasSubBusinesses()
 	return self.m_subs and #self.m_subs > 0
-end
-
----@param name string
----@return integer
-function BusinessFront:GetNameOffset(name)
-	return ProductNames[name]
 end
 
 ---@return integer

@@ -382,7 +382,7 @@ local function drawCEOwarehouses()
 		GUI:Tooltip(_T("YRV3_FINISH_SOURCE_MISSION_TT"))
 	end
 
-	if (Backend:GetAPIVersion() == Enums.eAPIVersion.V2) then
+	if (Backend:GetAPIVersion() ~= Enums.eAPIVersion.V2) then
 		ImGui.SetNextItemWidth(240)
 		GVars.features.yrv3.wh_crate_custom_amount, _ = ImGui.SliderInt(
 			"##sliderWHCrates",

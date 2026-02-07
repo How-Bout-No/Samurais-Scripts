@@ -9,15 +9,9 @@
 
 local BusinessBase = require("includes.modules.businesses.BusinessBase")
 
--- TODO: Use SGSL for this
-local HGProp, WHProp, WHCP
-if (Backend:GetAPIVersion == Enums.eAPIVersion.V2) then
-	-- https://github.com/UTM-ORG/YimScripts/blob/main/ImagineNothing/Biz-teroids.lua
-	HGProp, WHProp, WHCP = ScriptGlobal(1882707 + 7), ScriptGlobal(1882682 + 13), ScriptGlobal(262145 + 15825)
-elseif (Backend:GetAPIVersion == Enums.eAPIVersion.V1) then
-	-- https://www.unknowncheats.me/forum/4459361-post725.html
-	HGProp, WHProp, WHCP = ScriptGlobal(1882440 + 6), ScriptGlobal(1882416 + 12), ScriptGlobal(262145 + 15825)
-end
+-- TODO: Use SGSL for this or find tunable names to support Legacy
+-- https://github.com/UTM-ORG/YimScripts/blob/main/ImagineNothing/Biz-teroids.lua
+local HGProp, WHProp = ScriptGlobal(1882707 + 7), ScriptGlobal(1882682 + 13)
 
 ---@param crates integer
 local function GetCEOCratesValue(crates)
@@ -25,35 +19,33 @@ local function GetCEOCratesValue(crates)
 		return 0
 	end
 
-	if (Backend:GetAPIVersion() == Enums.eAPIVersion.V1) then
-		if (crates == 1) then
-			return tunables.get_int("EXEC_CONTRABAND_SALE_VALUE_THRESHOLD1")
-		end
+	if (crates == 1) then
+		return tunables.get_int("EXEC_CONTRABAND_SALE_VALUE_THRESHOLD1")
+	end
 
-		if (crates == 2) then
-			return tunables.get_int("EXEC_CONTRABAND_SALE_VALUE_THRESHOLD2") * 2 -- +1
-		end
+	if (crates == 2) then
+		return tunables.get_int("EXEC_CONTRABAND_SALE_VALUE_THRESHOLD2") * 2 -- +1
+	end
 
-		if (crates == 3) then
-			return tunables.get_int("EXEC_CONTRABAND_SALE_VALUE_THRESHOLD3") * 3 -- +1
-		end
+	if (crates == 3) then
+		return tunables.get_int("EXEC_CONTRABAND_SALE_VALUE_THRESHOLD3") * 3 -- +1
+	end
 
-		if (crates == 4 or crates == 5) then
-			return tunables.get_int("EXEC_CONTRABAND_SALE_VALUE_THRESHOLD4") * crates -- +1
-		end
+	if (crates == 4 or crates == 5) then
+		return tunables.get_int("EXEC_CONTRABAND_SALE_VALUE_THRESHOLD4") * crates -- +1
+	end
 
-		if (crates >= 6 and crates <= 9) then
-			return (tunables.get_int("EXEC_CONTRABAND_SALE_VALUE_THRESHOLD4") + math.floor((crates - 4) / 2)) * crates -- +0
-		end
+	if (crates >= 6 and crates <= 9) then
+		return (tunables.get_int("EXEC_CONTRABAND_SALE_VALUE_THRESHOLD4") + math.floor((crates - 4) / 2)) * crates -- +0
+	end
 
-		if (crates >= 10 and crates <= 110) then
-			return (tunables.get_int("EXEC_CONTRABAND_SALE_VALUE_THRESHOLD7") + math.floor((crates - 10) / 5)) * crates -- +3
-		end
+	if (crates >= 10 and crates <= 110) then
+		return (tunables.get_int("EXEC_CONTRABAND_SALE_VALUE_THRESHOLD7") + math.floor((crates - 10) / 5)) * crates -- +3
+	end
 
-		if (crates == 111) then
-			return tunables.get_int("EXEC_CONTRABAND_SALE_VALUE_THRESHOLD21") * 111 -- + 14
-		end
-	else
+	if (crates == 111) then
+		return tunables.get_int("EXEC_CONTRABAND_SALE_VALUE_THRESHOLD21") * 111 -- + 14
+	end
 		-- START = 10000
 		-- OFFSET:
 		-- crates <= 1 : 0
@@ -61,39 +53,6 @@ local function GetCEOCratesValue(crates)
 		-- crates 5-44 : 500
 		-- crates 45-99 : 250
 		-- crates > 99 : 500
-
-		-- local obj1 = SGSL:Get(SGSL.data.bhub_max_units_global_1)
-		-- local BMUG = obj1:AsGlobal()
-		-- local offset = obj1:GetOffset(1) + BusinessFront:GetNameOffset(ref.name)
-		-- BMUG:At(offset):ReadInt()
-		if (crates == 1) then
-			return WHCP:ReadInt()
-		end
-
-		if (crates == 2) then
-			return WHCP:At(1):ReadInt() * 2 -- +1
-		end
-
-		if (crates == 3) then
-			return WHCP:At(2):ReadInt() * 3 -- +1
-		end
-
-		if (crates == 4 or crates == 5) then
-			return WHCP:At(3):ReadInt() * crates -- +1
-		end
-
-		if (crates >= 6 and crates <= 9) then
-			return (WHCP:At(3):ReadInt() + math.floor((crates - 4) / 2)) * crates -- +0
-		end
-
-		if (crates >= 10 and crates <= 110) then
-			return (WHCP:At(6):ReadInt() + math.floor((crates - 10) / 5)) * crates -- +3
-		end
-
-		if (crates == 111) then
-			return WHCP:At(20):ReadInt() * 111 -- + 14
-		end
-	end
 
 	return 0
 end

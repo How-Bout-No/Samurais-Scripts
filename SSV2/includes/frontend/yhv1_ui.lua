@@ -190,12 +190,6 @@ local function drawCayoTab()
 	end
 	ImGui.EndDisabled()
 
-	ImGui.Separator()
-	GVars.features.dunk.bypass_casino_bans, _ = GUI:CustomToggle(_T "CP_COOLDOWN_BYPASS_ENABLE",
-		GVars.features.dunk.bypass_casino_bans, {
-			tooltip = _T("CP_COOLDOWN_BYPASS_TOOLTIP"),
-			color   = Color("#AA0000")
-		})
 	if GUI:Button(_T "YH_CAYO_RESET_ALL") then
 		stats.set_int("MPX_H4_MISSIONS", 0)
 		stats.set_int("MPX_H4_PROGRESS", 0)
