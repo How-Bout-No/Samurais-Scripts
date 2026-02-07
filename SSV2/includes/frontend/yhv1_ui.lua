@@ -128,12 +128,12 @@ local function drawCayoTab()
 		targets_c[new_secondary_target_c + 1] = -1
 		
 		stats.set_int("MPX_H4LOOT_CASH_I", targets_i[0])
-		stats.set_int("MPX_H4LOOT_WEED_I", targets_i[1])
-		stats.set_int("MPX_H4LOOT_COKE_I", targets_i[2])
-		stats.set_int("MPX_H4LOOT_GOLD_I", targets_i[3])
 		stats.set_int("MPX_H4LOOT_CASH_C", targets_c[0])
+		stats.set_int("MPX_H4LOOT_WEED_I", targets_i[1])
 		stats.set_int("MPX_H4LOOT_WEED_C", targets_c[1])
+		stats.set_int("MPX_H4LOOT_COKE_I", targets_i[2])
 		stats.set_int("MPX_H4LOOT_COKE_C", targets_c[2])
+		stats.set_int("MPX_H4LOOT_GOLD_I", targets_i[3])
 		stats.set_int("MPX_H4LOOT_GOLD_C", targets_c[3])
 	end
 
@@ -189,6 +189,9 @@ local function drawCayoTab()
 		stats.set_int("MPX_H4CNF_HEL_DISRP", 3)
 	end
 	ImGui.EndDisabled()
+	if (cayo_heist_disruptions == 9) then
+		GUI:Tooltip("Already Enabled!")
+	end
 
 	ImGui.Separator()
 	if GUI:Button(_T "YH_CAYO_RESET_ALL") then

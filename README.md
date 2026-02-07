@@ -101,6 +101,7 @@ This project was rewritten from scratch using [SmallBase](https://github.com/xes
 ## Features
 
 A full list of available features and their usage [can be found here](docs/Features.md).
+If using YimLuaAPI, some features may be partially or completely broken.
 
 ## FAQ
 
@@ -110,9 +111,9 @@ A full list of available features and their usage [can be found here](docs/Featu
 - **Q:** What is YimLuaAPI and how do I use it?
 - **A:**
   - **What is it:** [YimLuaAPI](https://github.com/TupoyeMenu/YimLuaAPI) is a universal Lua API that works for both Legacy and Enhanced.
-  - **How to use it:** Right now there is no release because it's still in development. If you want to try it, you have to compile it yourself. Once you have `YimLuaAPI.dll`, inject it into any GTA branch (Legacy/Enhanced), it will create a folder on first injection: `%AppData%\YimLuaAPI`. Simply place the script there and you're done. You can still use YimMenu/YimMenuV2 but the script has to only exist in YimLuaAPI.
+  - **How to use it:** Right now there is no release because it's still in development. If you want to try it, you have to compile it yourself. Once you have `YimLuaAPI.dll`, inject it into any GTA branch (Legacy/Enhanced), it will create a folder on first injection: `%AppData%\YimLuaAPI`. Simply place the script there and you're done. As of the latest recommended YLAPI ([ac1ed75](https://github.com/TupoyeMenu/YimLuaAPI/tree/ac1ed75)), you can NOT use YimMenuV1/YimMenuV2 at the same time as they will conflict.
 
-- **Q:** Why can't-I run this in YimMenuV2?
+- **Q:** Why can't I run this in YimMenuV2?
 - **A:** There are several reasons why:
   - YimMenuV2 doesn't have a finished Lua API. `require` isn't even present, let alone custom bindings.
   - There are several versions and flavors of the Lua programming language. This project is written in [Lua 5.4](https://www.lua.org/manual/5.4/) and YimMenuV2's API uses [LuaJIT](https://luajit.org/). Explaining the difference here is not ideal but it's not only the language difference, it's also how they are embedded in each menu.
