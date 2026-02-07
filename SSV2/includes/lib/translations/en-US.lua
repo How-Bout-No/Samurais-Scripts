@@ -669,10 +669,16 @@ return {
 
 	--#region YimHeists
 	["YH_BASIC_TAB"]                       = "Basic",
-	["YH_HEIST_TAB"]                       = "Heists",
-	["YH_FEATURE_DISABLED"]                = "This feature is currently disabled!",
-	["YH_PREP_SETTINGS"]                   = "Skips",
-	["YH_PREP_SKIP"]                       = "Skip To Finale",
+	["YH_CAYO_TAB"]                        = "Cayo Perico",
+	["YH_PREP_SKIP"]                       = "Skip Prep Missions",
 	["YH_PREP_SKIP_NOTIF"]                 = "All Prep Missions have been skipped. You can now start the final mission.",
+	["YH_CAYO_TARGET_PRIMARY"]             = "Primary Target",
+	["YH_CAYO_TARGET_SECONDARY_I"]         = "Secondary Target (Island)",
+	["YH_CAYO_TARGET_SECONDARY_C"]         = "Secondary Target (Compound)",
+	["YH_CAYO_DIFFICULTY"]                 = "Hard Mode",
+	["YH_CAYO_APPROACH"]                   = "Approach Vehicle",
+	["YH_CAYO_WEAPONS"]                    = "Weapon Loadout",
+	["YH_CAYO_DISRUPTION"]                 = "Enable All Disruptions",
+	["YH_CAYO_RESET_ALL"]                  = "Reset All Progress",
 	--#endregion
 }

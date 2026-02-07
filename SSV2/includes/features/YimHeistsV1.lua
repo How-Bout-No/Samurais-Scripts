@@ -13,7 +13,6 @@ local SGSL = require("includes.services.SGSL")
 ---@class YimHeists
 ---@field private m_raw_data RawBusinessData
 ---@field m_tab Tab
----@field protected m_thread Thread?
 local YimHeists = { m_raw_data = require("includes.data.yrv3_data") }
 YimHeists.__index = YimHeists
 
@@ -22,10 +21,6 @@ function YimHeists:init()
 	local instance = setmetatable({
 		m_tab = GUI:RegisterNewTab(Enums.eTabID.TAB_ONLINE, "YimHeists")
 	}, self)
-
-	instance.m_thread = ThreadManager:RegisterLooped("SS_YH", function()
-		instance:Main()
-	end)
 
 	return instance
 end
@@ -38,14 +33,6 @@ function YimHeists:IsPropertyIndexValid(idx)
 	end
 
 	return idx > 0 and idx < math.int32_max()
-end
-
-function YimHeists:CanAccess()
-	return (Backend:GetAPIVersion() == Enums.eAPIVersion.V1)
-		and Backend:IsUpToDate()
-		and Game.IsOnline()
-		and not script.is_active("maintransition")
-		and not NETWORK.NETWORK_IS_ACTIVITY_SESSION()
 end
 
 --@param statName string
@@ -69,17 +56,6 @@ function YimHeists:GetAgencyLocation()
 
 	local ref       = self.m_raw_data.Agencies[property_index]
 	return ref.coords
-end
-
-function YimHeists:Main()
-	if (not Backend:IsUpToDate() and self.m_thread and self.m_thread:IsRunning()) then
-		self.m_thread:Stop()
-	end
-
-	if (not self:CanAccess()) then
-		sleep(500)
-		return
-	end
 end
 
 return YimHeists
