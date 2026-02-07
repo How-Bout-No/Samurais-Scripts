@@ -190,6 +190,7 @@ local function drawCayoTab()
 	end
 	ImGui.EndDisabled()
 
+	ImGui.Separator()
 	if GUI:Button(_T "YH_CAYO_RESET_ALL") then
 		stats.set_int("MPX_H4_MISSIONS", 0)
 		stats.set_int("MPX_H4_PROGRESS", 0)
@@ -201,13 +202,13 @@ local function drawCayoTab()
 	end
 end
 
-local function DrawDunk()
+local function DrawHeist()
 	if (not Game.IsOnline() or not Backend:IsUpToDate()) then
 		ImGui.Text(_T("GENERIC_UNAVAILABLE_SP"))
 		return
 	end
 
-	if (ImGui.BeginTabBar("##dunkBar")) then
+	if (ImGui.BeginTabBar("##heistBar")) then
 		ImGui.PushStyleVar(ImGuiStyleVar.ItemSpacing, 10, 10)
 
 		if ImGui.BeginTabItem(_T("GENERIC_GENERAL_LABEL")) then
@@ -230,4 +231,4 @@ local function DrawDunk()
 	end
 end
 
-YHV1.m_tab:RegisterGUI(DrawDunk)
+YHV1.m_tab:RegisterGUI(DrawHeist)

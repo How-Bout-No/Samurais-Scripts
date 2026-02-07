@@ -22,32 +22,6 @@ return {
 			capture_group = 1
 		}
 	},
-	bhub_max_units_global_1 = {
-		description = "bhub_max_units_global_1",
-		file = "apparcadebusinesshub.c",
-		LEGACY = {
-			value = 262145,
-			pattern = [[return (Global_\w{6})(\.f_2\w{4})]],
-			capture_group = 1,
-			offsets = {
-				{
-					value = 24058,
-					capture_group = 2
-				}
-			}
-		},
-		ENHANCED = {
-			value = 262145,
-			pattern = [[return (Global_\w{6})(\.f_2\w{4})]],
-			capture_group = 1,
-			offsets = {
-				{
-					value = 24062,
-					capture_group = 2
-				}
-			}
-		}
-	},
 	freemode_business_global = {
 		description = "Freemode Business Global",
 		file = "freemode.c",
