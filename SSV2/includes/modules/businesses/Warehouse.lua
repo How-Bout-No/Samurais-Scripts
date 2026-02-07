@@ -9,6 +9,16 @@
 
 local BusinessBase = require("includes.modules.businesses.BusinessBase")
 
+-- TODO: Use SGSL for this
+local HGProp, WHProp, WHCP
+if (Backend:GetAPIVersion == Enums.eAPIVersion.V2) then
+	-- https://github.com/UTM-ORG/YimScripts/blob/main/ImagineNothing/Biz-teroids.lua
+	HGProp, WHProp, WHCP = ScriptGlobal(1882707 + 7), ScriptGlobal(1882682 + 13), ScriptGlobal(262145 + 15825)
+elseif (Backend:GetAPIVersion == Enums.eAPIVersion.V1) then
+	-- https://www.unknowncheats.me/forum/4459361-post725.html
+	HGProp, WHProp, WHCP = ScriptGlobal(1882440 + 6), ScriptGlobal(1882416 + 12), ScriptGlobal(262145 + 15825)
+end
+
 ---@param crates integer
 local function GetCEOCratesValue(crates)
 	if (not crates or crates <= 0) then
@@ -56,7 +66,6 @@ local function GetCEOCratesValue(crates)
 		-- local BMUG = obj1:AsGlobal()
 		-- local offset = obj1:GetOffset(1) + BusinessFront:GetNameOffset(ref.name)
 		-- BMUG:At(offset):ReadInt()
-		local WHCP = ScriptGlobal.new(262145 + 15825) -- TODO: Use SGSL for this
 		if (crates == 1) then
 			return WHCP:ReadInt()
 		end
@@ -187,10 +196,16 @@ function Warehouse:ReStock()
 	end
 
 	if (self.m_type == Enums.eWarehouseType.HANGAR) then
+		if (GVars.features.yrv3.hg_crate_custom) then
+			HGProp:WriteInt(GVars.features.yrv3.hg_crate_custom_amount)
+		end
 		stats.set_bool_masked("MPX_DLC22022PSTAT_BOOL3", true, 9)
 	elseif (self.m_type == Enums.eWarehouseType.SPECIAL_CARGO) then
 		if (not self.m_id or not math.is_inrange(self.m_id, 0, 4)) then
 			return 0
+		end
+		if (GVars.features.yrv3.wh_crate_custom) then
+			WHProp:WriteInt(GVars.features.yrv3.wh_crate_custom_amount)
 		end
 		stats.set_bool_masked("MPX_FIXERPSTAT_BOOL1", true, self.m_id + 12)
 	end

@@ -1403,8 +1403,8 @@ local function YAV3UI()
 			ImGui.EndTabItem()
 		end
 
-		-- TODO: Fix this from completely breaking everything on Enhanced
-		if (Backend:GetAPIVersion() == Enums.eAPIVersion.V1) then
+		-- TODO: Fix this from completely breaking everything on YLAPI
+		if (not FAKE_YIMAPI) then
 			if ImGui.BeginTabItem("Companions") then
 				s_CurrentTab = "main_companions"
 				DrawCompanions()

@@ -217,6 +217,7 @@ return {
 	--#region YRV3
 	["YRV3_RANDOM_CRATES"]                 = "Get Random Crates",
 	["YRV3_SUPPLIES_FILL"]                 = "Fill Supplies",
+	["YRV3_CRATES_AMOUNT"]                 = "%d Crates per Fill",
 	["YRV3_CLUBHOUSE_NOT_OWNED"]           = "You don't own a motorcycle club.",
 	["YRV3_MC_NONE_OWNED"]                 = "You don't own any biker businesses.",
 	["YRV3_CEO_NONE_OWNED"]                = "You don't own any CEO warehouses.",

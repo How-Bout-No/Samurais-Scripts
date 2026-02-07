@@ -270,13 +270,13 @@ local function drawBikerBusiness(bb, notOwnedLabel)
 	end
 
 	local name          = bb:GetName()
-	local updgrade1     = bb:HasEquipmentUpgrade()
-	local updgrade2     = bb:HasStaffUpgrade()
+	local upgrade1      = bb:HasEquipmentUpgrade()
+	local upgrade2      = bb:HasStaffUpgrade()
 	local supplies      = bb:GetSuppliesCount()
 	local stock         = bb:GetProductCount()
 	local totalValue    = bb:GetProductValue()
-	local eqLabelCol    = updgrade1 and "green" or "red"
-	local staffLabelCol = updgrade2 and "green" or "red"
+	local eqLabelCol    = upgrade1 and "green" or "red"
+	local staffLabelCol = upgrade2 and "green" or "red"
 	local maxUnits      = bb:GetMaxUnits()
 	local index         = bb:GetIndex() or -1
 	local bulletWidth   = measureBulletWidths({
@@ -312,12 +312,12 @@ local function drawBikerBusiness(bb, notOwnedLabel)
 
 	ImGui.BulletText(_T("YRV3_EQUIP_UPGDRADE"))
 	ImGui.SameLine(bulletWidth)
-	GUI:Text(updgrade1 and _T("GENERIC_ACTIVE") or _T("GENERIC_INACTIVE"), { color = Color(eqLabelCol) })
+	GUI:Text(upgrade1 and _T("GENERIC_ACTIVE") or _T("GENERIC_INACTIVE"), { color = Color(eqLabelCol) })
 
 	if (index < 6) then
 		ImGui.BulletText(_T("YRV3_STAFF_UPGDRADE"))
 		ImGui.SameLine(bulletWidth)
-		GUI:Text(updgrade2 and _T("GENERIC_ACTIVE") or _T("GENERIC_INACTIVE"), { color = Color(staffLabelCol) })
+		GUI:Text(upgrade2 and _T("GENERIC_ACTIVE") or _T("GENERIC_INACTIVE"), { color = Color(staffLabelCol) })
 	end
 
 	ImGui.BulletText(_T("YRV3_SUPPLIES_LABEL"))
@@ -381,10 +381,46 @@ local function drawCEOwarehouses()
 	if (bCond) then
 		GUI:Tooltip(_T("YRV3_FINISH_SOURCE_MISSION_TT"))
 	end
+
+	if (Backend:GetAPIVersion() == Enums.eAPIVersion.V2) then
+		ImGui.SetNextItemWidth(240)
+		GVars.features.yrv3.wh_crate_custom_amount, _ = ImGui.SliderInt(
+			"##sliderWHCrates",
+			GVars.features.yrv3.wh_crate_custom_amount,
+			1, 111,
+			_T("YRV3_CRATES_AMOUNT"),
+			ImGuiSliderFlags.AlwaysClamp
+		)
+		ImGui.SameLine()
+
+		GVars.features.yrv3.wh_crate_custom, _ = GUI:CustomToggle(_T("GENERIC_ENABLED"),
+			GVars.features.yrv3.wh_crate_custom
+		)
+	end
 end
 
 local function drawHangar()
 	drawWarehouse(YRV3:GetHangar(), _T("YRV3_HANGAR_NOT_OWNED"))
+
+	if (Backend:GetAPIVersion() == Enums.eAPIVersion.V2) then
+		ImGui.Spacing()
+		ImGui.SeparatorText(_T("GENERIC_MISC"))
+		ImGui.Spacing()
+
+		ImGui.SetNextItemWidth(240)
+		GVars.features.yrv3.hg_crate_custom_amount, _ = ImGui.SliderInt(
+			"##sliderHGCrates",
+			GVars.features.yrv3.hg_crate_custom_amount,
+			1, 50,
+			_T("YRV3_CRATES_AMOUNT"),
+			ImGuiSliderFlags.AlwaysClamp
+		)
+		ImGui.SameLine()
+
+		GVars.features.yrv3.hg_crate_custom, _ = GUI:CustomToggle(_T("GENERIC_ENABLED"),
+			GVars.features.yrv3.hg_crate_custom
+		)
+	end
 end
 
 local function drawBunker()
