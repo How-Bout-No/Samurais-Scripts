@@ -111,7 +111,7 @@ If using YimLuaAPI, some features may be partially or completely broken.
 - **Q:** What is YimLuaAPI and how do I use it?
 - **A:**
   - **What is it:** [YimLuaAPI](https://github.com/TupoyeMenu/YimLuaAPI) is a universal Lua API that works for both Legacy and Enhanced.
-  - **How to use it:** Right now there is no release because it's still in development. If you want to try it, you have to compile it yourself. Once you have `YimLuaAPI.dll`, inject it into any GTA branch (Legacy/Enhanced), it will create a folder on first injection: `%AppData%\YimLuaAPI`. Simply place the script there and you're done. As of the latest recommended YLAPI ([ac1ed75](https://github.com/TupoyeMenu/YimLuaAPI/tree/ac1ed75)), you can NOT use YimMenuV1/YimMenuV2 at the same time as they will conflict.
+  - **How to use it:** The recommended version is at least [ac1ed75](https://github.com/TupoyeMenu/YimLuaAPI/tree/ac1ed75). Right now there is no release because it's still in development. If you want to try it, you have to compile it yourself. Once you have `YimLuaAPI.dll`, inject it into any GTA branch (Legacy/Enhanced), it will create a folder on first injection: `%AppData%\YimLuaAPI`. Simply place the script there and you're done.
 
 - **Q:** Why can't I run this in YimMenuV2?
 - **A:** There are several reasons why:
