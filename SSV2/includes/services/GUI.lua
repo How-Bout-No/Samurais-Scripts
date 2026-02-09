@@ -383,6 +383,11 @@ function GUI:DrawDummyTab()
 			debug_counter = 0
 		end
 	end
+
+	if (GVars.backend.debug_mode) then
+		ImGui.SameLine()
+		ImGui.TextDisabled("DEBUG")
+	end
 	ImGui.EndChild()
 end
 

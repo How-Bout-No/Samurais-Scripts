@@ -26,7 +26,7 @@ from pathlib import Path
 from slpp import slpp as Lua
 
 
-PARENT_PATH = Path(__file__).resolve().parent
+PARENT_PATH = Path(__file__).resolve().parent.parent
 SCRIPT_ROOT = PARENT_PATH.parent.parent
 REPO_URLS = [
     "https://raw.githubusercontent.com/acidlabsgg/gtav-legacy-scripts/refs/heads/main/scripts",
@@ -232,9 +232,8 @@ def main(auto: bool = True):
         local = args.local
         path = args.decomps_path
         generate(offsets_table, version, local, path)
-    
-    if (args.diff):
-        return
+        if (args.diff):
+            return
     
     data = serialize_lua(offsets_table)
     with open(table_path, "w", encoding="utf-8", newline="\n") as f:

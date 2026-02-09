@@ -12,9 +12,11 @@ local reservedKeys <const> = {
 	gpad = Set.new(23, 24, 25, 71, 75)
 }
 
+
 local keyName, keyCode
 local currentKeyName = ""
-local _reserved = false
+local _reserved      = false
+local button_size    = vec2:new(120, 32)
 
 local function GetCurrentKey()
 	local _, code, name = KeyManager:IsAnyKeyPressed()
@@ -31,13 +33,14 @@ end
 ---@param gvarKey string
 ---@param isController? boolean
 local function DrawKeybinds(gvarKey, isController)
-	local label = gvarKey:replace("_", " "):titlecase()
-	local main_path = isController and "gamepad_keybinds" or "keyboard_keybinds"
-	local current_path = _F("%s.%s", main_path, gvarKey)
-	local current_key = table.get_nested_key(GVars, current_path)
+	local label               = gvarKey:replace("_", " "):titlecase()
+	local main_path           = isController and "gamepad_keybinds" or "keyboard_keybinds"
+	local current_path        = _F("%s.%s", main_path, gvarKey)
+	local current_key         = table.get_nested_key(GVars, current_path)
 	local key_container_width = 160
-	local reset_button_width = 80
-	local spacing = ImGui.GetStyle().ItemSpacing.x
+	local reset_button_width  = 80
+	local style               = ImGui.GetStyle()
+
 	ImGui.BulletText(label)
 	local avail_x, _ = ImGui.GetContentRegionAvail()
 
@@ -52,11 +55,11 @@ local function DrawKeybinds(gvarKey, isController)
 		avail_x
 		- key_container_width
 		- reset_button_width
-		- spacing
+		- style.ItemSpacing.x
 	)
 
 	ImGui.SetNextItemWidth(key_container_width)
-	currentKeyName, _ = ImGui.InputText(_F("##", label), currentKeyName, 16, ImGuiInputTextFlags.ReadOnly)
+	currentKeyName, _ = ImGui.InputText(_F("##%s", label), currentKeyName, 16, ImGuiInputTextFlags.ReadOnly)
 
 	if GUI:IsItemClicked(0) then
 		ImGui.OpenPopup(label)
@@ -79,7 +82,7 @@ local function DrawKeybinds(gvarKey, isController)
 			| ImGuiWindowFlags.NoTitleBar
 			| ImGuiWindowFlags.NoMove
 		) then
-		local size = vec2:new(ImGui.GetWindowSize())
+		local size   = vec2:new(ImGui.GetWindowSize())
 		local _, pos = GUI:GetNewWindowSizeAndCenterPos(0.5, 0.5, size)
 		local region = vec2:new(ImGui.GetContentRegionAvail())
 		ImGui.SetWindowPos(label, pos.x, pos.y, ImGuiCond.Always)
@@ -90,7 +93,9 @@ local function DrawKeybinds(gvarKey, isController)
 			Backend.disable_input = false
 			ImGui.CloseCurrentPopup()
 		end
+
 		ImGui.Separator()
+		ImGui.Dummy(1, 10)
 
 		if not keyName then
 			ImGui.Text(ImGui.TextSpinner(_T("SETTINGS_HOTKEY_WAIT"), 10, ImGuiSpinnerStyle.BOUNCE_DOTS))
@@ -104,22 +109,25 @@ local function DrawKeybinds(gvarKey, isController)
 			_reserved = reserved_set:Contains(keyCode)
 
 			if not _reserved then
+				local valueBarSize = vec2:new(button_size.x, ImGui.GetTextLineHeightWithSpacing())
 				ImGui.Text(_T("SETTINGS_HOTKEY_FOUND"))
 				ImGui.SameLine()
-				local name = _F("[%s]", keyName)
-				local nameWidth = ImGui.CalcTextSize(name)
-				ImGui.SetCursorPosX(region.x - nameWidth - spacing)
-				ImGui.Text(name)
+				ImGui.SetCursorPosX(size.x - valueBarSize.x - style.WindowPadding.x)
+				ImGui.ValueBar(
+					"##keyName",
+					0,
+					valueBarSize,
+					ImGuiValueBarFlags.NONE,
+					{ fmt = keyName }
+				)
 			else
-				GUI:Text(_T("SETTINGS_HOTKEY_RESERVED"), { color = Color("red"), alpha = 0.86 })
+				GUI:Text(_T("SETTINGS_HOTKEY_RESERVED"), { color = Color("red"), alpha = 0.86, wrap_pos = size.x })
 			end
 		end
-
-		ImGui.SetCursorPosY(region.y - 35)
-		ImGui.Dummy(1, 10)
+		ImGui.SetCursorPosY(region.y - button_size.y + style.WindowPadding.y)
 
 		if (keyCode and keyName and not _reserved) then
-			if GUI:Button(_F("%s##keybinds", _T("GENERIC_CONFIRM"))) then
+			if GUI:Button(_T("GENERIC_CONFIRM"), { size = button_size }) then
 				if not isController then
 					KeyManager:UpdateKeybind(current_key, { id = keyName })
 				end
@@ -131,11 +139,11 @@ local function DrawKeybinds(gvarKey, isController)
 				ImGui.CloseCurrentPopup()
 			end
 			ImGui.SameLine()
+			ImGui.SetCursorPosX(size.x - button_size.x - style.WindowPadding.x)
 		end
 
 		if (keyName) then
-			if ImGui.Button(_T("GENERIC_CLEAR")) then
-				GUI:PlaySound("Cancel")
+			if GUI:Button(_T("GENERIC_CLEAR"), { size = button_size }) then
 				keyCode, keyName = nil, nil
 			end
 		end
@@ -145,23 +153,16 @@ end
 
 return function()
 	if (ImGui.BeginTabBar("##ss_keybinds")) then
-		local id = 1
 		if (ImGui.BeginTabItem(_T("SETTINGS_KEYBINDS_KEYBOARD"))) then
 			for key in pairs(GVars.keyboard_keybinds) do
-				ImGui.PushID(id)
 				DrawKeybinds(key, false)
-				ImGui.PopID()
-				id = id + 1
 			end
 			ImGui.EndTabItem()
 		end
 
 		if (ImGui.BeginTabItem(_T("SETTINGS_KEYBINDS_CONTROLLER"))) then
 			for key in pairs(GVars.gamepad_keybinds) do
-				ImGui.PushID(id)
 				DrawKeybinds(key, true)
-				ImGui.PopID()
-				id = id + 1
 			end
 			ImGui.EndTabItem()
 		end
