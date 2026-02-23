@@ -234,7 +234,7 @@ return {
 	--#endregion
 
 	--#region YRV3
-	["YRV3_RANDOM_CRATES"]                 = "Get Random Crates",
+	["YRV3_FILL_CRATES"]                   = "Fill Crates",
 	["YRV3_SUPPLIES_FILL"]                 = "Fill Supplies",
 	["YRV3_CEO_OFFICE_NOT_OWNED"]          = "You don't own a CEO office.",
 	["YRV3_CLUBHOUSE_NOT_OWNED"]           = "You don't own a motorcycle club.",
@@ -272,7 +272,6 @@ return {
 	["YRV3_CRATES_LABEL"]                  = "Crates",
 	["YRV3_SUPPLIES_LABEL"]                = "Supplies",
 	["YRV3_STOCK_LABEL"]                   = "Stock",
-	["YRV3_AUTO_FILL"]                     = "Auto-Fill",
 	["YRV3_AUTO_PROD"]                     = "Auto-Produce",
 	["YRV3_AUTO_SELL"]                     = "Auto-Sell",
 	["YRV3_NC_ALWAYS_POPULAR"]             = "Always Popular",

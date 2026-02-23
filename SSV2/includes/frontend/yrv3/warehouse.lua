@@ -80,14 +80,9 @@ return function(warehouse, notOwnedLabel)
 	ImGui.Spacing()
 
 	ImGui.BeginDisabled(prod >= max)
-	ImGui.BeginDisabled(warehouse.auto_fill)
-	if GUI:Button(_T("YRV3_RANDOM_CRATES")) then
+	if GUI:Button(_T("YRV3_FILL_CRATES")) then
 		warehouse:ReStock()
 	end
-	ImGui.EndDisabled()
-
-	ImGui.SameLine()
-	warehouse.auto_fill, _ = GUI:CustomToggle(_T("YRV3_AUTO_FILL"), warehouse.auto_fill)
 	ImGui.EndDisabled()
 	ImGui.EndChild()
 end

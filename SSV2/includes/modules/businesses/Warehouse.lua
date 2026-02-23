@@ -8,6 +8,16 @@
 
 
 local BusinessBase = require("includes.modules.businesses.BusinessBase")
+-- TODO: Use SGSL for this
+local HGProp, WHProp
+if (Backend:GetAPIVersion() == Enums.eAPIVersion.V2) then
+	-- https://github.com/UTM-ORG/YimScripts/blob/main/ImagineNothing/Biz-teroids.lua
+	HGProp, WHProp = ScriptGlobal(1882707 + 7), ScriptGlobal(1882682 + 13)
+elseif (Backend:GetAPIVersion() == Enums.eAPIVersion.V1) then
+	-- UNTESTED
+	-- https://www.unknowncheats.me/forum/4459361-post725.html
+	HGProp, WHProp = ScriptGlobal(1882440 + 6), ScriptGlobal(1882416 + 12)
+end
 
 ---@param crates integer
 local function GetCEOCratesValue(crates)
@@ -77,12 +87,10 @@ Enums.eWarehouseType = {
 ---@class Warehouse : BusinessBase
 ---@field private m_id integer
 ---@field private m_type eWarehouseType
----@field private m_auto_fill_running boolean
 ---@field private m_name string
 ---@field private m_coords vec3
 ---@field private m_size integer
 ---@field private m_max_units integer
----@field public auto_fill boolean
 local Warehouse = setmetatable({}, BusinessBase)
 Warehouse.__index = Warehouse
 
@@ -96,16 +104,12 @@ function Warehouse.new(opts, warehouse_type)
 	local instance               = setmetatable(base, Warehouse)
 	instance.m_type              = warehouse_type
 	instance.m_size              = opts.size
-	instance.auto_fill           = false
-	instance.m_auto_fill_running = false
 
 	---@diagnostic disable-next-line
 	return instance
 end
 
 function Warehouse:Reset()
-	self.auto_fill           = false
-	self.m_auto_fill_running = false
 	self:ResetImpl()
 end
 
@@ -157,44 +161,20 @@ function Warehouse:ReStock()
 	end
 
 	if (self.m_type == Enums.eWarehouseType.HANGAR) then
+		HGProp:WriteInt(50)
 		stats.set_bool_masked("MPX_DLC22022PSTAT_BOOL3", true, 9)
 	elseif (self.m_type == Enums.eWarehouseType.SPECIAL_CARGO) then
 		if (not self.m_id or not math.is_inrange(self.m_id, 0, 4)) then
 			return 0
 		end
+		WHProp:WriteInt(111)
 		stats.set_bool_masked("MPX_FIXERPSTAT_BOOL1", true, self.m_id + 12)
 	end
-end
-
-function Warehouse:AutoFill()
-	ThreadManager:Run(function()
-		while (self:IsValid() and self.auto_fill and not self:HasFullProduction()) do
-			self:ReStock()
-			if (not Game.IsOnline()) then
-				break
-			end
-
-			sleep(GVars.features.yrv3.autofill_delay or 300)
-		end
-
-		self.auto_fill = false
-		self.m_auto_fill_running = false
-	end)
 end
 
 function Warehouse:Update()
 	if (not self:IsValid()) then
 		return
-	end
-
-	if (self.auto_fill and not self.m_auto_fill_running) then
-		if (self:HasFullProduction()) then
-			self.auto_fill = false
-			return
-		end
-
-		self.m_auto_fill_running = true
-		self:AutoFill()
 	end
 end
 

@@ -21,7 +21,7 @@ local commandRegistry <const> = {
 	},
 	["yrv3.restock_hangar"] = {
 		callback = function(_)
-			YRV3:CommandHangarAutoFill()
+			YRV3:CommandHangarFill()
 		end,
 		opts = { description = "Restocks your hangar." }
 	},
@@ -37,11 +37,11 @@ local commandRegistry <const> = {
 			if (type(arg) == "string" and arg == "all") then
 				for _, wh in ipairs(office:GetCargoWarehouses()) do
 					if (wh:IsValid() and not wh:HasFullProduction()) then
-						wh.auto_fill = true
+						wh:ReStock()
 					end
 				end
 			elseif (type(arg) == "number") then
-				YRV3:CommandWarehouseAutoFill(arg)
+				YRV3:CommandWarehouseFill(arg)
 			else
 				Notifier:ShowError("CommandExecutor", "Invalid command argument!")
 			end

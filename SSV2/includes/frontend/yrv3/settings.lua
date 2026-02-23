@@ -36,27 +36,6 @@ local function getStepForDelay(ms)
 	end
 end
 
-local function drawAutofillTimeSelector()
-	local delay        = GVars.features.yrv3.autofill_delay
-	local mode         = getTimeThreshold(delay)
-	local data         = timer_data[mode]
-	local v            = delay / data.mult
-	local step_ms      = getStepForDelay(delay)
-	local step         = step_ms / data.mult
-	local step_fast    = (step_ms * 5) / data.mult
-	local new_value, c = ImGui.InputFloat(
-		"##autofill_delay",
-		v,
-		step,
-		step_fast,
-		_F("%.1f %s", v, _T(data.label))
-	)
-
-	if (c) then
-		GVars.features.yrv3.autofill_delay = math.clamp(new_value * data.mult, 100, 6e5)
-	end
-end
-
 return function()
 	local __state        = YRV3:GetState()
 	local isReloading    = __state == Enums.eYRState.RELOADING
@@ -110,8 +89,4 @@ return function()
 	end
 
 	ImGui.Text(_F(_T("YRV3_AUTOSELL_CURRENT"), YRV3:GetRunningSellScriptDisplayName()))
-
-	GUI:HeaderText(_T("YRV3_AUTO_FILL"), { separator = true, spacing = true })
-	ImGui.Text(_T("YRV3_AUTO_FILL_DELAY"))
-	drawAutofillTimeSelector()
 end

@@ -604,7 +604,7 @@ function YRV3:CommandFinishSale()
 end
 
 ---@param index number
-function YRV3:CommandWarehouseAutoFill(index)
+function YRV3:CommandWarehouseFill(index)
 	if (not self:CanAccess()) then
 		return
 	end
@@ -624,11 +624,11 @@ function YRV3:CommandWarehouseAutoFill(index)
 		return
 	end
 
-	warehouse.auto_fill = not warehouse.auto_fill
-	Notifier:ShowMessage(warehouse:GetName(), _F("Autofill %s.", warehouse.auto_fill and "enabled" or "disabled"))
+	warehouse:ReStock()
+	Notifier:ShowMessage(warehouse:GetName(), "Restocked")
 end
 
-function YRV3:CommandHangarAutoFill()
+function YRV3:CommandHangarFill()
 	if (not self:CanAccess()) then
 		return
 	end
@@ -648,8 +648,8 @@ function YRV3:CommandHangarAutoFill()
 		return
 	end
 
-	hangar.auto_fill = not hangar.auto_fill
-	Notifier:ShowMessage(hangar:GetName(), _F("Autofill %s.", hangar.auto_fill and "enabled" or "disabled"))
+	hangar:ReStock()
+	Notifier:ShowMessage(hangar:GetName(), "Restocked")
 end
 
 ---@param index integer -- `1 .. 7`
@@ -752,13 +752,13 @@ function YRV3:FillAll()
 	if (self.m_businesses.office) then
 		for _, wh in ipairs(self.m_businesses.office:GetCargoWarehouses()) do
 			if (wh:IsValid()) then
-				wh.auto_fill = true
+				wh:ReStock()
 			end
 		end
 	end
 
 	if (self.m_businesses.hangar and self.m_businesses.hangar:IsValid()) then
-		self.m_businesses.hangar.auto_fill = true
+		self.m_businesses.hangar:ReStock()
 	end
 
 	for i = 1, 7 do
