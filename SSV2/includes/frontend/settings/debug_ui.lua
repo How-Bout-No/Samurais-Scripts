@@ -563,6 +563,14 @@ local function DrawMiscTests()
 end
 
 return function()
+	local pos = LocalPlayer:GetPos()
+	ImGui.Text(_F("X: %.2f, Y: %.2f, Z: %.2f", pos.x, pos.y, pos.z))
+	if GUI:IsItemClicked(1) then
+		GUI:SetClipBoardText(_F("%.2f %.2f %.2f", pos.x, pos.y, pos.z))
+	end
+	GUI:Tooltip("Right click to copy raw values")
+	ImGui.Separator()
+
 	ImGui.BeginTabBar("##debug")
 	ImGui.PushTextWrapPos(ImGui.GetFontSize() * 35)
 
