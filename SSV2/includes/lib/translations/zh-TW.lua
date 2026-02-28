@@ -678,5 +678,6 @@ return {
 	["YH_DDAY_HELP2_FMT"] = "按下“%s”按鈕，然後呼叫萊斯特取消世界末日的所有 3 次搶劫。",
 	["YH_FACILITY_NOT_OWNED"] = "購買設施造訪末日搶劫。",
 	["YH_TP_FACILITY"] = "傳送到設施",
-	["YH_DDAY_FORCE"] = "強制重置"
+	["YH_DDAY_FORCE"] = "強制重置",
+	["YRV3_FILL_CRATES"] = "填充板條箱"
 }

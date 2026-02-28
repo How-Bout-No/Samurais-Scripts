@@ -678,5 +678,6 @@ return {
 	["YH_DDAY_HELP1"] = "Doomsday를 호스트로 플레이한 적이 없는 경우 이 방법이 필요합니다. 이미 호스트로서 일부 습격을 플레이하고 완료했다면 이 단계를 건너뛰세요.",
 	["YH_DDAY_FORCE"] = "강제 재설정",
 	["YH_TP_FACILITY"] = "시설로 순간이동",
-	["YH_DDAY_HELP2_FMT"] = "'%s' 버튼을 누른 다음 Lester에게 전화하여 Doomsday의 3가지 습격을 모두 취소하세요."
+	["YH_DDAY_HELP2_FMT"] = "'%s' 버튼을 누른 다음 Lester에게 전화하여 Doomsday의 3가지 습격을 모두 취소하세요.",
+	["YRV3_FILL_CRATES"] = "상자 채우기"
 }

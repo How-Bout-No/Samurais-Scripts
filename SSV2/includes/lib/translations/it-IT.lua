@@ -678,5 +678,6 @@ return {
 	["YH_FACILITY_NOT_OWNED"] = "Acquista una struttura per accedere al colpo dell'apocalisse.",
 	["YH_DDAY_HELP2_FMT"] = "Premi il pulsante '%s', quindi chiama Lester per annullare tutti e 3 i colpi per Doomsday.",
 	["YH_TP_FACILITY"] = "Teletrasportarsi alla struttura",
-	["YH_DDAY_FORCE"] = "RESET FORZATO"
+	["YH_DDAY_FORCE"] = "RESET FORZATO",
+	["YRV3_FILL_CRATES"] = "Riempi le casse"
 }
