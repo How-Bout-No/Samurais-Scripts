@@ -260,7 +260,7 @@ local RawBusinessData <const> = {
 		["cfr_cd"] = {
 			dirty = false,
 			gstate = function()
-				return GVars.features.yim_heists.cfr_cd
+				return GVars.features.mastermind.cfr_cd
 			end,
 			onEnable = function()
 				if (stats.get_int("SALV23_CFR_COOLDOWN") > 0) then
@@ -271,7 +271,7 @@ local RawBusinessData <const> = {
 		["knoway_cd"] = {
 			dirty = false,
 			gstate = function()
-				return GVars.features.yim_heists.knoway_cd
+				return GVars.features.mastermind.knoway_cd
 			end,
 			onEnable = function()
 				if (stats.get_int("MPX_M25_AVI_MISSION_CD") > 0) then
@@ -282,7 +282,7 @@ local RawBusinessData <const> = {
 		["dre_cd"] = {
 			dirty = false,
 			gstate = function()
-				return GVars.features.yim_heists.dre_cd
+				return GVars.features.mastermind.dre_cd
 			end,
 			onEnable = function()
 				if (stats.get_int("MPX_FIXER_STORY_COOLDOWN") > 0) then
@@ -293,7 +293,7 @@ local RawBusinessData <const> = {
 		["ogfa_cd"] = {
 			dirty = false,
 			gstate = function()
-				return GVars.features.yim_heists.ogfa_cd
+				return GVars.features.mastermind.ogfa_cd
 			end,
 			onEnable = function()
 				if (stats.get_int("MPX_HACKER24_MFM_COOLDOWN") > 0) then
@@ -304,7 +304,7 @@ local RawBusinessData <const> = {
 		["cayo_cd"] = {
 			dirty = false,
 			gstate = function()
-				return GVars.features.yim_heists.cayo_cd
+				return GVars.features.mastermind.cayo_cd
 			end,
 			onEnable = function()
 				if (stats.get_int("MPX_H4_COOLDOWN") > 0) then
@@ -318,7 +318,7 @@ local RawBusinessData <const> = {
 		["dday_cd"] = {
 			dirty = false,
 			gstate = function()
-				return GVars.features.yim_heists.dday_cd
+				return GVars.features.mastermind.dday_cd
 			end,
 			onEnable = function()
 				if (stats.get_int("MPX_GANGOPS_LAUNCH_TIME") > 0) then
