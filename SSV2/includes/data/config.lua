@@ -283,6 +283,8 @@ local Config <const> = {
 			ogfa_cd = false,
 			cayo_cd = false,
 			dday_cd = false,
+			gv_map = true,
+			gv_minimap = true
 		},
 		yrv3 = {
 			autofill_delay = 500,

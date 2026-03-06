@@ -9,6 +9,7 @@
 
 local Mastermind         = require("includes.features.Mastermind"):init()
 local SGSL               = require("includes.services.SGSL")
+local gve_ui             = require("includes.frontend.gve_ui")
 local secondary_targets  = { "Cash", "Weed", "Coke", "Gold" }
 local cayo_secondary_target_i, cayo_secondary_target_c
 
@@ -417,6 +418,13 @@ local function HeistUI()
 				tabCallbacks[i]()
 				ImGui.EndTabItem()
 			end
+		end
+
+		if ImGui.BeginTabItem("Extra") then
+			if (ImGui.CollapsingHeader("Gun Van Editor")) then
+				gve_ui()
+			end
+			ImGui.EndTabItem()
 		end
 		ImGui.EndTabBar()
 	end

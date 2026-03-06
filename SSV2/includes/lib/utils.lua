@@ -448,6 +448,12 @@ function stats.increment_stat(stat_name, v, min, max)
 	stat_set(stat_name, sum)
 end
 
+---@param tunable string|integer
+---@return integer
+function tunables.get_uint(tunable)
+	return Cast(tunables.get_int(tunable)):AsUint32_t()
+end
+
 -- Equality comparator for pointer objects.
 ---@type Comparator<pointer, pointer>
 function memory.pointer:__eq(right)
