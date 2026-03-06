@@ -276,7 +276,7 @@ local Config <const> = {
 			slot_machine_cap = 0,
 			autoplay_slots_delay = 500,
 		},
-		yim_heists = {
+		mastermind = {
 			cfr_cd = false,
 			knoway_cd = false,
 			dre_cd = false,

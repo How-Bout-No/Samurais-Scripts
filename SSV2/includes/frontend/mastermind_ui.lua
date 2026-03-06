@@ -130,9 +130,9 @@ local function drawBasicTab()
 		ImGui.EndDisabled()
 
 		local key = heist.stat.cooldown_gvar
-		GVars.features.yim_heists[key], _ = GUI:CustomToggle(
+		GVars.features.mastermind[key], _ = GUI:CustomToggle(
 			_T("CP_HEIST_COOLDOWN_DISABLE"),
-			GVars.features.yim_heists[key], {
+			GVars.features.mastermind[key], {
 				tooltip = _T("YH_COOLDOWN_BYPASS_TOOLTIP"),
 				color   = Color("#AA0000"),
 				onClick = function()
@@ -285,9 +285,9 @@ local function drawCayoTab()
 
 	ImGui.EndDisabled() -- on_cooldown
 
-	GVars.features.yim_heists.cayo_cd, _ = GUI:CustomToggle(
+	GVars.features.mastermind.cayo_cd, _ = GUI:CustomToggle(
 		_T("CP_HEIST_COOLDOWN_DISABLE"),
-		GVars.features.yim_heists.cayo_cd, {
+		GVars.features.mastermind.cayo_cd, {
 			tooltip = _T("YH_COOLDOWN_BYPASS_TOOLTIP"),
 			color   = Color("#AA0000"),
 			onClick = function()
@@ -376,8 +376,8 @@ local function drawDDayTab()
 	ImGui.EndDisabled()
 	ImGui.EndDisabled() -- on_cooldown
 
-	GVars.features.yim_heists.dday_cd, _ = GUI:CustomToggle(_T("CP_HEIST_COOLDOWN_DISABLE"),
-		GVars.features.yim_heists.dday_cd, {
+	GVars.features.mastermind.dday_cd, _ = GUI:CustomToggle(_T("CP_HEIST_COOLDOWN_DISABLE"),
+		GVars.features.mastermind.dday_cd, {
 			tooltip = _T("YH_COOLDOWN_BYPASS_TOOLTIP"),
 			color   = Color("#AA0000"),
 			onClick = function()
